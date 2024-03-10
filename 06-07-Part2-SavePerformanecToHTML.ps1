@@ -1,3 +1,53 @@
+$rootpath = "C:\git-projects\dcst1005\dcst1005"
+
+
+$scriptBlock = {
+    # Capturing performance data
+    $data = @()
+    $data += Get-Counter '\Processor(_Total)\% Processor Time' | ForEach-Object { $_.CounterSamples }
+    $data += Get-Counter '\Memory\% Committed Bytes In Use' | ForEach-Object { $_.CounterSamples }
+    $data += Get-Counter '\Memory\Available MBytes' | ForEach-Object { $_.CounterSamples }
+    $data
+}
+
+# Duration and interval settings
+$duration = 1 # 10 minutes 
+$interval = 10 # 10 second intervals
+$startTime = Get-Date
+
+# Initialize $results_DC1 and $results_SRV1 as arrays
+$results_DC1 = @()
+$results_SRV1 = @()
+
+# Loop to collect data every interval for the duration of 24 hours
+while ((New-TimeSpan -Start $startTime).TotalMinutes -lt $duration) {
+
+    # Append the results of each iteration to $results_DC1 and $results_SRV1
+    $results_DC1 += Invoke-Command -ComputerName dc1 -ScriptBlock $scriptBlock
+    Start-Sleep -Seconds $interval
+
+    $results_SRV1 += Invoke-Command -ComputerName srv1 -ScriptBlock $scriptBlock
+    Start-Sleep -Seconds $interval
+}
+
+
+<# Sample structure for $results to simulate the actual data collection
+$results = @(
+    # Processor Time samples
+    @{Path='\Processor(_Total)\% Processor Time'; CookedValue=20; Timestamp=(Get-Date).AddSeconds(-90)},
+    @{Path='\Memory\% Committed Bytes In Use'; CookedValue=30; Timestamp=(Get-Date).AddSeconds(-90)},
+    @{Path='\Memory\Available MBytes'; CookedValue=8000; Timestamp=(Get-Date).AddSeconds(-90)},
+)
+#>
+
+
+# Initialize strings to hold formatted data for each metric
+$processorTimeDataJS_DC1 = @()
+$committedBytesDataJS_DC1 = @()
+$availableMBytesDataJS_DC1 = @()
+
+$processorTimeDataJS_SRV1 = @()
+$committedBytesDataJS_SRV1 = @()
 $availableMBytesDataJS_SRV1 = @()
 
 foreach ($sample in $results_DC1) {
