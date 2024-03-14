@@ -90,12 +90,12 @@ foreach ($user in $users) {
 
     # Determine the AD group based on the department
     # This is an example. Modify it according to your group naming convention and departments
-    $groupName = "g_" + $department
+    $groupName = "l_FileShare_" + $department + "_Write"
 
     try {
         # Get the AD user object
         $ADuser = Get-ADUser -filter * -Properties samAccountName, department | Where-Object {$_.samaccountname -eq $newusername}
-        $groupname = "g_" + $ADuser.Department
+        $groupname = "l_FileShare_" + $ADuser.Department + "_Write"
 
         # Add the user to the group
         Add-ADGroupMember -Identity $groupName -Members $adUser.SamAccountName -ErrorAction Stop

@@ -146,7 +146,7 @@ function Get-UserOU {
 $rootFolder = "C:\git-projects\dcst1005\dcst1005\"
 
 # CSV-file with users
-$Users = Import-Csv -Path "$rootFolder\tmp_csv-users-example.csv" -Delimiter ","
+$Users = Import-Csv -Path "$rootFolder\02-03-tmp_csv-users-example.csv" -Delimiter ","
 
 # Initialize arrays to store the results
 $usersCreated = @()
