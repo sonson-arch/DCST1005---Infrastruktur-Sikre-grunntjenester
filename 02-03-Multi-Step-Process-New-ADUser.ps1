@@ -167,7 +167,7 @@ foreach ($user in $users) {
     #Write-Host $password -ForegroundColor DarkGreen
 
     # Only works if the OU already exists and names in CSV-file are correct / matching AD structure
-    $ou = Get-UserOU -department $user.Department -rootOUusers "InfraIT_Users"
+    $ou = Get-UserOU -department $user.Department -rootOUusers "DiggyCyb_Users"
     #Write-Host $ou -ForegroundColor DarkMagenta
 
     # Check if a user with this samAccountName or UserPrincipalName already exists in AD

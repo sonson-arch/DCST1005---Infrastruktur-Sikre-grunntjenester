@@ -28,12 +28,12 @@ Get-ADOrganizationalUnit -Filter * | Where-Object {$_.name -eq "TestOU"} | Remov
 
 # Eksempelbedrift - LearnIT - MERK!!! Video brukt i 2023, navn vil variere fra tidligere gjennomgang
 # HUSK Å TA STILLING TIL HVOR DU VIL LAGRE OU-ER, GRUPPER OG BRUKERE OG NAVN DERE BRUKER
-$lit_users = "LearnIT_Users"
-$lit_groups = "LearnIT_Groups"
-$lit_computers = "LearnIT_Computers"
+$lit_users = "DiggyCyb_Users"
+$lit_groups = "DiggyCyb_Groups"
+$lit_computers = "DiggyCyb_Computers"
 
 $topOUs = @($lit_users,$lit_groups,$lit_computers )
-$departments = @('hr','it','consultants','sales','finance')
+$departments = @('hr','it','dev','sale','finance')
 
 foreach ($ou in $topOUs) {
     New-ADOrganizationalUnit $ou -Description "Top OU for LearnIT" -ProtectedFromAccidentalDeletion:$false
@@ -79,7 +79,7 @@ New-ADGroup -name "g_all_employee" `
             -GroupCategory Security `
             -GroupScope Global `
             -DisplayName "g_all_employee" `
-            -path "OU=LearnIT_Groups,DC=core,DC=sec" `
+            -path "OU=DiggyCyb_Groups,DC=core,DC=sec" `
             -Description "all employee"
 
 
