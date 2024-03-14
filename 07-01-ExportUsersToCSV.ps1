@@ -3,7 +3,7 @@ $csvFilePath = "C:\git-projects\dcst1005\dcst1005\07-00-CSV-Users.csv"
 
 # Define the LDAP path to the specific OU from which to retrieve users
 # get-adorganizationalUnit -Filter * | where-Object {$_.name -like "*users*"} | ft name, distinguishedName
-$ouPath = "OU=InfraIT_Users,DC=InfraIT,DC=sec"
+$ouPath = "OU=DiggyCyb_Users,DC=DiggyCyb,DC=sec"
 
 # Retrieve all user objects from the specified OU
 $users = Get-ADUser -Filter * -SearchBase $ouPath -Properties surName, givenName, displayName, userPrincipalName, company, department, sAMAccountName
