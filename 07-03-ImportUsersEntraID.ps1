@@ -8,7 +8,7 @@ $PasswordProfile = @{
     }
 foreach ($user in $users) {
     $Params = @{
-        UserPrincipalName = $user.userPrincipalName + "@digsec.onmicrosoft.com"
+        UserPrincipalName = $user.userPrincipalName + "digsecgr12.onmicrosoft.com"
         DisplayName = $user.displayName
         GivenName = $user.GivenName
         Surname = $user.Surname
@@ -16,7 +16,7 @@ foreach ($user in $users) {
         AccountEnabled = $true
         PasswordProfile = $PasswordProfile
         Department = $user.Department
-        CompanyName = "InfraIT Sec"
+        CompanyName = "DiggyCyb Sec"
         Country = "Norway"
         City = "Trondheim"
     }
