@@ -10,7 +10,7 @@
 # New-MgGroupMember - https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.groups/new-mggroupmember?view=graph-powershell-1.0
 #
 
-$TenantID = "bd0944c8-c04e-466a-9729-d7086d13a653" # Remember to change this to your own TenantID
+$TenantID = "e0294a3a-a293-4611-b89a-4d48a2f076ca" # Remember to change this to your own TenantID
 Connect-MgGraph -TenantId $TenantID -Scopes "User.ReadWrite.All", "Group.ReadWrite.All", "Directory.ReadWrite.All", "RoleManagement.ReadWrite.Directory"
 
 # Get the current session details
@@ -33,7 +33,7 @@ $OrgName = (Get-MgOrganization).DisplayName
 
 
 # Root folder for the project
-$rootFolder = "/Users/melling/git-projects/dcst1005"
+$rootFolder = "C:\Users\sondr\OneDrive - NTNU\DIGSEC\1. år DIGSEC\Vår 24\DCST1005 - Infrastruktur, sikre grunntjenester\DCST1005 GIT\DCST1005---Infrastruktur-Sikre-grunntjenester"
 
 # Variables for groups created and not created
 $usersAddedToGroup = @()
@@ -76,6 +76,6 @@ $usersNotAddedToGroup = $usersNotAddedToGroup | ForEach-Object { [PSCustomObject
 $groupsNotExists = $groupsNotExists | ForEach-Object { [PSCustomObject]@{ Group = $_ } }
 
 # Export the results to CSV files
-$usersAddedToGroup | Export-Csv "$rootFolder/users_added_to_group.csv" -NoTypeInformation -Encoding utf8
-$usersNotAddedToGroup | Export-Csv "$rootFolder/users_not_added_to_group.csv" -NoTypeInformation -Encoding utf8
-$groupsNotExists | Export-Csv "$rootFolder/groups_not_exists.csv" -NoTypeInformation -Encoding utf8
+$usersAddedToGroup | Export-Csv "$rootFolder\users_added_to_group.csv" -NoTypeInformation -Encoding utf8
+$usersNotAddedToGroup | Export-Csv "$rootFolder\users_not_added_to_group.csv" -NoTypeInformation -Encoding utf8
+$groupsNotExists | Export-Csv "$rootFolder\groups_not_exists.csv" -NoTypeInformation -Encoding utf8
