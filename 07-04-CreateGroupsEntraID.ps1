@@ -12,7 +12,7 @@
 #
 #
 
-$TenantID = "bd0944c8-c04e-466a-9729-d7086d13a653" # Remember to change this to your own TenantID
+$TenantID = "e0294a3a-a293-4611-b89a-4d48a2f076ca" # Remember to change this to your own TenantID
 Connect-MgGraph -TenantId $TenantID -Scopes "User.ReadWrite.All", "Group.ReadWrite.All", "Directory.ReadWrite.All", "RoleManagement.ReadWrite.Directory"
 
 # Get the current session details
@@ -36,7 +36,7 @@ $OrgName = (Get-MgOrganization).DisplayName
 
 
 # Root folder for the project
-$rootFolder = "/Users/melling/git-projects/dcst1005"
+$rootFolder = "C:\Users\sondr\OneDrive - NTNU\DIGSEC\1. år DIGSEC\Vår 24\DCST1005 - Infrastruktur, sikre grunntjenester\DCST1005 GIT\DCST1005---Infrastruktur-Sikre-grunntjenester"
 $csvfile = "07-00-CSV-groups.csv"
 
 # Variables for groups created and not created
@@ -50,7 +50,7 @@ $suffix = "_group"
 
 
 # Import the CSV-file with users
-$groups = Import-Csv -Path "$rootFolder/$csvfile" -Delimiter "," # Remember to put the / \ in the path (depending on OS)
+$groups = Import-Csv -Path "$rootFolder\$csvfile" -Delimiter "," # Remember to put the / \ in the path (depending on OS)
 
 foreach ($group in $groups) {
     $group = $prefix + $group.groups + $suffix
@@ -79,6 +79,6 @@ $groupsNotCreatedObjects = $groupsNotCreated | ForEach-Object { [PSCustomObject]
 $groupsExistsObjects = $groupsExists | ForEach-Object { [PSCustomObject]@{GroupName = $_} }
 
 # Export the results to CSV files
-$groupsCreatedObjects | Export-Csv -Path "$rootFolder/groups_created.csv" -NoTypeInformation -Encoding UTF8
-$groupsNotCreatedObjects | Export-Csv -Path "$rootFolder/groups_not_created.csv" -NoTypeInformation -Encoding UTF8
-$groupsExistsObjects | Export-Csv -Path "$rootFolder/groups_exists.csv" -NoTypeInformation -Encoding UTF8
+$groupsCreatedObjects | Export-Csv -Path "$rootFolder\groups_created.csv" -NoTypeInformation -Encoding UTF8
+$groupsNotCreatedObjects | Export-Csv -Path "$rootFolder\groups_not_created.csv" -NoTypeInformation -Encoding UTF8
+$groupsExistsObjects | Export-Csv -Path "$rootFolder\groups_exists.csv" -NoTypeInformation -Encoding UTF8
