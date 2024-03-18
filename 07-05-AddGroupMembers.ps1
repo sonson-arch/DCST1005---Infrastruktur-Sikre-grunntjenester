@@ -46,9 +46,9 @@ $suffix = "_group"
 
 
 # Getting all users into an array with the Get-MgUser cmdlet and department property
-$users = Get-MgUser -All -Property Department, UserPrincipalName, Id |
+$users = Get-MgUser -All -Property Group, Department, UserPrincipalName, Id |
     Where-Object { $_.Department -ne $null -and $_.Department -ne '' } | 
-    Select-Object Department, UserPrincipalName, Id
+    Select-Object Group, Department, UserPrincipalName, Id
 
 foreach ($user in $users) {
     $group = $prefix + $user.Department + $suffix
@@ -79,3 +79,4 @@ $groupsNotExists = $groupsNotExists | ForEach-Object { [PSCustomObject]@{ Group 
 $usersAddedToGroup | Export-Csv "$rootFolder\users_added_to_group.csv" -NoTypeInformation -Encoding utf8
 $usersNotAddedToGroup | Export-Csv "$rootFolder\users_not_added_to_group.csv" -NoTypeInformation -Encoding utf8
 $groupsNotExists | Export-Csv "$rootFolder\groups_not_exists.csv" -NoTypeInformation -Encoding utf8
+
